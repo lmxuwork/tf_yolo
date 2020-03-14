@@ -10,7 +10,7 @@
     - 过程
       - 1、将图像resize到448*448作为神经网络的输入
       - 2、将 $448*448*3$ 的图像经过多层卷积(24层卷积)和一个全连接层后输出 $4096$ 维的feature map(特征图)。
-      - 3、看到最后一个全连接层，这里实现了YOLOv1最为关键的一步,将图像划分为S×S个网格（grid cell）。即将图像划分成 [公式] 个网格，而每个网格预测位置误差和分类误差，即B个bounding box的置信度和box的位置参数(x,y,w,h)和C个条件类别概率P。
+      - 3、看到最后一个全连接层，这里实现了YOLOv1最为关键的一步,将图像划分为S×S个网格（grid cell）。即将图像划分成 [公式] 个网格，而每个网格预测位置误差和分类误差，即B个bounding box的置信度和box的位置参数(x,y,w,h)和C个条件类别概率Pr。
         - 如果某个object落入某个grid cell,那么这个grid cell就对该object负责。同时，每个grid cell预测B个类别的bounding box的位置和置信度。这个置信度并不只是该bounding box是待检测目标的概率，而是该bounding box是待检测目标的概率乘上该bounding box和真实位置的IoU的积。通过乘上这个交并比，反映出该bounding box预测位置的精度。
     　　　　　　$confidence = P(object)*IoU_{pred}^{truth} $
       　　　　　　　$S=7，B=2,$　C : 表示多少个类别
